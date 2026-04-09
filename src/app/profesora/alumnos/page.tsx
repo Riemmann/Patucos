@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import Image from "next/image"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -48,9 +48,7 @@ export default function ProfesoraAlumnosPage() {
               onClick={() => setSelectedId(alumno.id)}
             >
               <CardContent className="p-3 flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-border">
-                  <Image src={alumno.fotoUrl} alt={alumno.nombre} fill className="object-cover" />
-                </div>
+                <AvatarIniciales nombre={alumno.nombre} apellidos={alumno.apellidos} size="md" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium">{alumno.nombre} {alumno.apellidos}</p>
                   <p className="text-xs text-muted-foreground">{calcEdad(alumno.fechaNacimiento)}</p>
@@ -68,9 +66,7 @@ export default function ProfesoraAlumnosPage() {
           <Card>
             <CardContent className="p-6">
               <div className="text-center mb-4">
-                <div className="relative w-20 h-20 rounded-full overflow-hidden mx-auto mb-3 border-2 border-border">
-                  <Image src={selected.fotoUrl} alt={selected.nombre} fill className="object-cover" />
-                </div>
+                <AvatarIniciales nombre={selected.nombre} apellidos={selected.apellidos} size="xl" className="mx-auto mb-3" />
                 <h2 className="text-lg font-bold">{selected.nombre} {selected.apellidos}</h2>
                 <p className="text-sm text-muted-foreground">{calcEdad(selected.fechaNacimiento)} · Nacido/a el {new Date(selected.fechaNacimiento).toLocaleDateString('es-ES')}</p>
               </div>
@@ -93,9 +89,7 @@ export default function ProfesoraAlumnosPage() {
                 <h3 className="text-sm font-semibold">Contactos</h3>
                 {padresAlumno.map(p => (
                   <div key={p.id} className="flex items-center gap-3 p-2 rounded-lg bg-muted/50">
-                    <div className="relative w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                      <Image src={p.fotoUrl} alt={p.nombre} fill className="object-cover" />
-                    </div>
+                    <AvatarIniciales nombre={p.nombre} apellidos={p.apellidos} size="sm" />
                     <div className="flex-1">
                       <p className="text-sm font-medium">{p.nombre} {p.apellidos}</p>
                       <p className="text-xs text-muted-foreground capitalize">{p.relacion}</p>

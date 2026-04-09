@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import Image from "next/image"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -161,9 +161,7 @@ function RegistroContent() {
             return (
               <Card key={a.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => selectAlumno(a.id)}>
                 <CardContent className="p-4 text-center">
-                  <div className="relative w-14 h-14 rounded-full overflow-hidden mx-auto mb-2 border-2 border-border">
-                    <Image src={a.fotoUrl} alt={a.nombre} fill className="object-cover" />
-                  </div>
+                  <AvatarIniciales nombre={a.nombre} apellidos={a.apellidos} size="lg" className="mx-auto mb-2" />
                   <p className="text-sm font-medium">{a.nombre}</p>
                   <p className="text-xs text-muted-foreground">{a.apellidos}</p>
                   {completado ? (
@@ -190,9 +188,7 @@ function RegistroContent() {
           <Button variant="ghost" size="icon" onClick={() => setSelectedAlumnoId(null)}>
             <ArrowLeft className="w-5 h-5" />
           </Button>
-          <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-border">
-            <Image src={alumno.fotoUrl} alt={alumno.nombre} fill className="object-cover" />
-          </div>
+          <AvatarIniciales nombre={alumno.nombre} apellidos={alumno.apellidos} size="md" />
           <div>
             <h1 className="text-lg font-bold">{alumno.nombre} {alumno.apellidos}</h1>
             <p className="text-xs text-muted-foreground">{new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}</p>

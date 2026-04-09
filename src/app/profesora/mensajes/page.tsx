@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import Image from "next/image"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
@@ -55,9 +55,7 @@ export default function ProfesoraMensajesPage() {
           <Button variant="ghost" size="icon" onClick={() => setSelectedAlumnoId(null)}>
             <ArrowLeft className="w-5 h-5" />
           </Button>
-          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-border">
-            <Image src={alumno.fotoUrl} alt={alumno.nombre} fill className="object-cover" />
-          </div>
+          <AvatarIniciales nombre={alumno.nombre} apellidos={alumno.apellidos} size="sm" />
           <div>
             <p className="text-sm font-medium">Familia de {alumno.nombre}</p>
             <p className="text-xs text-muted-foreground">{padres.filter(p => alumno.padreIds.includes(p.id)).map(p => p.nombre).join(', ')}</p>
@@ -72,9 +70,7 @@ export default function ProfesoraMensajesPage() {
 
             return (
               <div key={msg.id} className={cn("flex gap-2", esProf && "flex-row-reverse")}>
-                <div className="relative w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
-                  <Image src={remitente?.fotoUrl || ''} alt="" fill className="object-cover" />
-                </div>
+                <AvatarIniciales nombre={remitente?.nombre || '?'} apellidos={remitente?.apellidos} size="xs" />
                 <div className={cn(
                   "max-w-[75%] rounded-2xl px-3 py-2",
                   esProf ? "bg-patuco-green-light rounded-tr-sm" : "bg-muted rounded-tl-sm"
@@ -117,9 +113,7 @@ export default function ProfesoraMensajesPage() {
           {conversaciones.map(({ alumno, ultimoMensaje, unread }) => (
             <Card key={alumno.id} className="cursor-pointer hover:shadow-sm transition-shadow" onClick={() => setSelectedAlumnoId(alumno.id)}>
               <CardContent className="p-3 flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-border">
-                  <Image src={alumno.fotoUrl} alt={alumno.nombre} fill className="object-cover" />
-                </div>
+                <AvatarIniciales nombre={alumno.nombre} apellidos={alumno.apellidos} size="md" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium">Familia de {alumno.nombre}</p>
                   <p className="text-xs text-muted-foreground truncate">{ultimoMensaje.contenido}</p>

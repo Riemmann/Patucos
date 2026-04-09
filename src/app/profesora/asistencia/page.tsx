@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import Image from "next/image"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -45,9 +45,7 @@ export default function ProfesoraAsistenciaPage() {
           return (
             <Card key={alumno.id}>
               <CardContent className="p-3 flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-border">
-                  <Image src={alumno.fotoUrl} alt={alumno.nombre} fill className="object-cover" />
-                </div>
+                <AvatarIniciales nombre={alumno.nombre} apellidos={alumno.apellidos} size="md" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium">{alumno.nombre} {alumno.apellidos.split(' ')[0]}</p>
                   <div className="flex items-center gap-2 mt-0.5">
