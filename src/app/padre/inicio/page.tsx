@@ -1,14 +1,14 @@
 'use client'
 
-import Image from "next/image"
 import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Camera, ChevronRight, Moon, MessageSquare, CalendarDays } from "lucide-react"
+import { Camera, ChevronRight, CalendarDays, MessageSquare } from "lucide-react"
 import { alumnos, getAula, getFotosAlumno, getProfesor } from "@/lib/data"
 import { useRegistro, useAsistencia, useNotificaciones } from "@/lib/use-demo-store"
-import { CANTIDAD_LABELS, CANTIDAD_EMOJI, TIPO_COMIDA_ICONS, TIPO_COMIDA_LABELS, ESTADO_ANIMO_EMOJI, ESTADO_ANIMO_LABELS, TIPO_NOTIFICACION_EMOJI, PRIORIDAD_COLORS } from "@/lib/constants"
+import { CANTIDAD_LABELS, CANTIDAD_EMOJI, TIPO_COMIDA_LABELS, ESTADO_ANIMO_EMOJI, ESTADO_ANIMO_LABELS, TIPO_NOTIFICACION_EMOJI } from "@/lib/constants"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
+import { FotoDisplay } from "@/components/shared/foto-placeholder"
 
 const ALUMNO = alumnos.find(a => a.id === 'alumno-4')!
 const AULA = getAula(ALUMNO.aulaId)!
@@ -21,7 +21,7 @@ function calcEdad(fechaNac: string): string {
   if (meses < 12) return `${meses} meses`
   const anos = Math.floor(meses / 12)
   const resto = meses % 12
-  return resto > 0 ? `${anos} año${anos > 1 ? 's' : ''} y ${resto} mes${resto > 1 ? 'es' : ''}` : `${anos} año${anos > 1 ? 's' : ''}`
+  return resto > 0 ? `${anos} ano${anos > 1 ? 's' : ''} y ${resto} mes${resto > 1 ? 'es' : ''}` : `${anos} ano${anos > 1 ? 's' : ''}`
 }
 
 export default function PadreInicioPage() {
@@ -35,62 +35,57 @@ export default function PadreInicioPage() {
   const hoyFormatted = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })
 
   return (
-    <div className="space-y-4">
-      {/* Child profile header */}
-      <Card className="border-0 shadow-none bg-gradient-to-r from-patuco-yellow-light to-patuco-green-light">
-        <CardContent className="p-4 flex items-center gap-4">
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md flex-shrink-0">
-            <Image src={ALUMNO.fotoUrl} alt={ALUMNO.nombre} fill className="object-cover" />
-          </div>
-          <div>
-            <h2 className="font-semibold text-lg">{ALUMNO.nombre} {ALUMNO.apellidos}</h2>
-            <p className="text-sm text-muted-foreground">{calcEdad(ALUMNO.fechaNacimiento)} · {AULA.emoji} Aula {AULA.nombre}</p>
-            {asistencia?.horaEntrada && (
-              <p className="text-xs text-patuco-green mt-1">Entrada a las {asistencia.horaEntrada}h</p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+    <div className="space-y-5">
+      {/* Child profile */}
+      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-border/40">
+        <AvatarIniciales nombre={ALUMNO.nombre} apellidos={ALUMNO.apellidos} size="lg" />
+        <div className="flex-1 min-w-0">
+          <h2 className="font-semibold text-[17px] leading-tight">{ALUMNO.nombre} {ALUMNO.apellidos}</h2>
+          <p className="text-sm text-muted-foreground mt-0.5">{calcEdad(ALUMNO.fechaNacimiento)}</p>
+          {asistencia?.horaEntrada && (
+            <div className="flex items-center gap-1.5 mt-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="text-xs text-emerald-600 font-medium">En el centro desde las {asistencia.horaEntrada}</span>
+            </div>
+          )}
+        </div>
+      </div>
 
-      {/* Date */}
-      <p className="text-sm text-muted-foreground capitalize text-center">{hoyFormatted}</p>
+      {/* Date pill */}
+      <p className="text-xs text-muted-foreground text-center capitalize tracking-wide">{hoyFormatted}</p>
 
-      {/* Meals summary */}
+      {/* Meals */}
       {registro && registro.comidas.length > 0 && (
-        <Card>
-          <CardHeader className="pb-2 px-4 pt-4">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">🍽️ Comidas de hoy</CardTitle>
-          </CardHeader>
-          <CardContent className="px-4 pb-4">
-            <div className="grid grid-cols-3 gap-3">
-              {registro.comidas.map(comida => (
-                <div key={comida.id} className="text-center p-3 rounded-xl bg-muted/50">
-                  <p className="text-lg">{TIPO_COMIDA_ICONS[comida.tipo]}</p>
-                  <p className="text-xs font-medium mt-1">{TIPO_COMIDA_LABELS[comida.tipo]}</p>
-                  <p className="text-lg mt-1">{CANTIDAD_EMOJI[comida.cantidad]}</p>
-                  <Badge variant="secondary" className="mt-1 text-[10px]">
+        <div className="space-y-2">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider px-1">Comidas</h3>
+          <div className="grid grid-cols-3 gap-2.5">
+            {registro.comidas.map(comida => (
+              <Card key={comida.id} className="border-border/40">
+                <CardContent className="p-3 text-center">
+                  <p className="text-xs text-muted-foreground font-medium">{TIPO_COMIDA_LABELS[comida.tipo]}</p>
+                  <p className="text-2xl mt-1.5 mb-1">{CANTIDAD_EMOJI[comida.cantidad]}</p>
+                  <Badge variant="secondary" className="text-[10px] font-medium">
                     {CANTIDAD_LABELS[comida.cantidad]}
                   </Badge>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
       )}
 
-      {/* Nap + Mood row */}
+      {/* Nap + Mood */}
       {registro && (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2.5">
           {registro.siestas.length > 0 && (
-            <Card>
-              <CardContent className="p-4 text-center">
-                <Moon className="w-5 h-5 mx-auto text-patuco-blue" />
-                <p className="text-xs font-medium mt-2">Siesta</p>
-                <p className="text-sm font-semibold mt-1">
-                  {registro.siestas[0].horaInicio} - {registro.siestas[0].horaFin || '...'}
+            <Card className="border-border/40">
+              <CardContent className="p-4">
+                <p className="text-xs text-muted-foreground font-medium">Siesta</p>
+                <p className="text-[15px] font-semibold mt-2 tabular-nums">
+                  {registro.siestas[0].horaInicio} – {registro.siestas[0].horaFin || '...'}
                 </p>
                 {registro.siestas[0].horaFin && (
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     {(() => {
                       const [h1, m1] = registro.siestas[0].horaInicio.split(':').map(Number)
                       const [h2, m2] = (registro.siestas[0].horaFin || '').split(':').map(Number)
@@ -103,11 +98,11 @@ export default function PadreInicioPage() {
             </Card>
           )}
           {registro.estadosAnimo.length > 0 && (
-            <Card>
-              <CardContent className="p-4 text-center">
-                <p className="text-2xl">{ESTADO_ANIMO_EMOJI[registro.estadosAnimo[registro.estadosAnimo.length - 1].estado]}</p>
-                <p className="text-xs font-medium mt-2">Estado de animo</p>
-                <p className="text-sm font-semibold mt-1">
+            <Card className="border-border/40">
+              <CardContent className="p-4">
+                <p className="text-xs text-muted-foreground font-medium">Estado de animo</p>
+                <p className="text-2xl mt-2">{ESTADO_ANIMO_EMOJI[registro.estadosAnimo[registro.estadosAnimo.length - 1].estado]}</p>
+                <p className="text-xs font-medium mt-0.5">
                   {ESTADO_ANIMO_LABELS[registro.estadosAnimo[registro.estadosAnimo.length - 1].estado]}
                 </p>
               </CardContent>
@@ -118,20 +113,18 @@ export default function PadreInicioPage() {
 
       {/* Teacher comment */}
       {registro?.comentarioGeneral && (
-        <Card className="border-patuco-yellow/30">
+        <Card className="border-border/40 bg-amber-50/40">
           <CardContent className="p-4">
             <div className="flex items-start gap-3">
               {profesor && (
-                <div className="relative w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                  <Image src={profesor.fotoUrl} alt={profesor.nombre} fill className="object-cover" />
-                </div>
+                <AvatarIniciales nombre={profesor.nombre} apellidos={profesor.apellidos} size="sm" />
               )}
-              <div>
-                <p className="text-xs font-medium text-muted-foreground mb-1">
-                  <MessageSquare className="w-3 h-3 inline mr-1" />
-                  {profesor ? `${profesor.nombre} ${profesor.apellidos}` : 'Profesora'}
-                </p>
-                <p className="text-sm leading-relaxed">{registro.comentarioGeneral}</p>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <p className="text-xs font-semibold">{profesor ? `${profesor.nombre} ${profesor.apellidos}` : 'Profesora'}</p>
+                  <span className="text-[10px] text-muted-foreground">Profesora</span>
+                </div>
+                <p className="text-[13px] leading-relaxed text-foreground/80">{registro.comentarioGeneral}</p>
               </div>
             </div>
           </CardContent>
@@ -140,66 +133,57 @@ export default function PadreInicioPage() {
 
       {/* Photos */}
       {fotos.length > 0 && (
-        <Card>
-          <CardHeader className="pb-2 px-4 pt-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium flex items-center gap-2">
-                <Camera className="w-4 h-4" /> Fotos de hoy
-              </CardTitle>
-              <Link href="/padre/fotos" className="text-xs text-primary flex items-center">
-                Ver todas <ChevronRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </CardHeader>
-          <CardContent className="px-4 pb-4">
-            <div className="grid grid-cols-3 gap-2">
-              {fotos.slice(0, 3).map(foto => (
-                <div key={foto.id} className="relative aspect-square rounded-lg overflow-hidden">
-                  <Image src={foto.url} alt={foto.descripcion} fill className="object-cover" />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between px-1">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Fotos de hoy</h3>
+            <Link href="/padre/fotos" className="text-xs text-amber-600 font-medium flex items-center gap-0.5">
+              Ver todas <ChevronRight className="w-3 h-3" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {fotos.slice(0, 3).map(foto => (
+              <div key={foto.id} className="relative aspect-square rounded-xl overflow-hidden bg-muted">
+                <FotoDisplay src={foto.url} alt={foto.descripcion} />
+              </div>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Notifications */}
       {unreadNotifs.length > 0 && (
-        <Card>
-          <CardHeader className="pb-2 px-4 pt-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium">🔔 Avisos</CardTitle>
-              <Link href="/padre/notificaciones" className="text-xs text-primary flex items-center">
-                Ver todos <ChevronRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </CardHeader>
-          <CardContent className="px-4 pb-4 space-y-2">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between px-1">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Avisos</h3>
+            <Link href="/padre/notificaciones" className="text-xs text-amber-600 font-medium flex items-center gap-0.5">
+              Ver todos <ChevronRight className="w-3 h-3" />
+            </Link>
+          </div>
+          <div className="space-y-2">
             {unreadNotifs.map(n => (
-              <div key={n.id} className="flex items-start gap-2 p-2 rounded-lg bg-muted/50">
-                <span className="text-sm">{TIPO_NOTIFICACION_EMOJI[n.tipo]}</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium truncate">{n.titulo}</p>
-                  <p className="text-xs text-muted-foreground truncate">{n.contenido}</p>
-                </div>
-                <Badge variant="secondary" className={`text-[10px] flex-shrink-0 ${PRIORIDAD_COLORS[n.prioridad]}`}>
-                  {n.prioridad === 'urgente' ? '!' : ''}
-                </Badge>
-              </div>
+              <Card key={n.id} className="border-border/40">
+                <CardContent className="p-3 flex items-start gap-3">
+                  <span className="text-base mt-0.5">{TIPO_NOTIFICACION_EMOJI[n.tipo]}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[13px] font-medium leading-tight">{n.titulo}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{n.contenido}</p>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
-      {/* Link to timeline */}
-      <Link href="/padre/dia" className="block">
-        <Card className="hover:shadow-md transition-shadow cursor-pointer border-primary/20">
+      {/* CTA: Full timeline */}
+      <Link href="/padre/dia">
+        <Card className="border-amber-200/60 bg-amber-50/30 hover:bg-amber-50/50 transition-colors cursor-pointer">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <CalendarDays className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">Ver timeline completo del dia</span>
+              <CalendarDays className="w-5 h-5 text-amber-600" />
+              <span className="text-[13px] font-medium">Ver timeline completo del dia</span>
             </div>
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            <ChevronRight className="w-4 h-4 text-amber-400" />
           </CardContent>
         </Card>
       </Link>

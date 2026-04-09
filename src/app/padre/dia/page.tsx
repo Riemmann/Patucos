@@ -1,7 +1,7 @@
 'use client'
 
-import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
+import { FotoDisplay } from "@/components/shared/foto-placeholder"
 import { Badge } from "@/components/ui/badge"
 import { alumnos, getFotosAlumno, buildTimeline } from "@/lib/data"
 import { useRegistro, useAsistencia } from "@/lib/use-demo-store"
@@ -111,8 +111,8 @@ function TimelineCard({ event }: { event: TimelineEvent }) {
     const foto = data as Foto
     return (
       <div>
-        <div className="relative w-full aspect-video rounded-lg overflow-hidden mt-1">
-          <Image src={foto.url} alt={foto.descripcion} fill className="object-cover" />
+        <div className="relative w-full aspect-video rounded-lg overflow-hidden mt-1 bg-muted">
+          <FotoDisplay src={foto.url} alt={foto.descripcion} />
         </div>
         <p className="text-xs text-muted-foreground mt-1">{foto.descripcion}</p>
       </div>

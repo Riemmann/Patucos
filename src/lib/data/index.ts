@@ -22,39 +22,39 @@ export const aulas: Aula[] = [
 
 // ============= PROFESORES =============
 export const profesores: Profesor[] = [
-  { id: 'prof-1', centroId: 'centro-1', aulaId: 'aula-1', nombre: 'Carmen', apellidos: 'Ruiz Fernández', email: 'carmen@patuco.es', telefono: '600111222', fotoUrl: 'https://i.pravatar.cc/150?img=47', rol: 'profesor' },
-  { id: 'prof-2', centroId: 'centro-1', aulaId: 'aula-2', nombre: 'María', apellidos: 'García López', email: 'maria@patuco.es', telefono: '600333444', fotoUrl: 'https://i.pravatar.cc/150?img=44', rol: 'profesor' },
-  { id: 'prof-3', centroId: 'centro-1', aulaId: 'aula-3', nombre: 'Laura', apellidos: 'Martínez Sánchez', email: 'laura@patuco.es', telefono: '600555666', fotoUrl: 'https://i.pravatar.cc/150?img=45', rol: 'profesor' },
-  { id: 'prof-4', centroId: 'centro-1', aulaId: null, nombre: 'Ana', apellidos: 'Pérez Rodríguez', email: 'ana@patuco.es', telefono: '600777888', fotoUrl: 'https://i.pravatar.cc/150?img=48', rol: 'director' },
+  { id: 'prof-1', centroId: 'centro-1', aulaId: 'aula-1', nombre: 'Carmen', apellidos: 'Ruiz Fernández', email: 'carmen@patuco.es', telefono: '600111222', fotoUrl: '', rol: 'profesor' },
+  { id: 'prof-2', centroId: 'centro-1', aulaId: 'aula-2', nombre: 'María', apellidos: 'García López', email: 'maria@patuco.es', telefono: '600333444', fotoUrl: '', rol: 'profesor' },
+  { id: 'prof-3', centroId: 'centro-1', aulaId: 'aula-3', nombre: 'Laura', apellidos: 'Martínez Sánchez', email: 'laura@patuco.es', telefono: '600555666', fotoUrl: '', rol: 'profesor' },
+  { id: 'prof-4', centroId: 'centro-1', aulaId: null, nombre: 'Ana', apellidos: 'Pérez Rodríguez', email: 'ana@patuco.es', telefono: '600777888', fotoUrl: '', rol: 'director' },
 ]
 
 // ============= PADRES =============
 export const padres: Padre[] = [
-  { id: 'padre-1', nombre: 'Carlos', apellidos: 'Hernández Díaz', email: 'carlos@email.com', telefono: '611222333', fotoUrl: 'https://i.pravatar.cc/150?img=11', relacion: 'padre' },
-  { id: 'padre-2', nombre: 'Elena', apellidos: 'Torres Molina', email: 'elena@email.com', telefono: '611444555', fotoUrl: 'https://i.pravatar.cc/150?img=26', relacion: 'madre' },
-  { id: 'padre-3', nombre: 'Miguel', apellidos: 'Navarro Gil', email: 'miguel@email.com', telefono: '611666777', fotoUrl: 'https://i.pravatar.cc/150?img=12', relacion: 'padre' },
-  { id: 'padre-4', nombre: 'Sofía', apellidos: 'Romero Blanco', email: 'sofia@email.com', telefono: '611888999', fotoUrl: 'https://i.pravatar.cc/150?img=32', relacion: 'madre' },
-  { id: 'padre-5', nombre: 'Javier', apellidos: 'Serrano Ruiz', email: 'javier@email.com', telefono: '612111222', fotoUrl: 'https://i.pravatar.cc/150?img=14', relacion: 'padre' },
-  { id: 'padre-6', nombre: 'Laura', apellidos: 'Moreno Castro', email: 'laura.m@email.com', telefono: '612333444', fotoUrl: 'https://i.pravatar.cc/150?img=25', relacion: 'madre' },
-  { id: 'padre-7', nombre: 'Roberto', apellidos: 'Jiménez Vega', email: 'roberto@email.com', telefono: '612555666', fotoUrl: 'https://i.pravatar.cc/150?img=15', relacion: 'padre' },
-  { id: 'padre-8', nombre: 'Marta', apellidos: 'Álvarez Prieto', email: 'marta@email.com', telefono: '612777888', fotoUrl: 'https://i.pravatar.cc/150?img=29', relacion: 'madre' },
+  { id: 'padre-1', nombre: 'Carlos', apellidos: 'Hernández Díaz', email: 'carlos@email.com', telefono: '611222333', fotoUrl: '', relacion: 'padre' },
+  { id: 'padre-2', nombre: 'Elena', apellidos: 'Torres Molina', email: 'elena@email.com', telefono: '611444555', fotoUrl: '', relacion: 'madre' },
+  { id: 'padre-3', nombre: 'Miguel', apellidos: 'Navarro Gil', email: 'miguel@email.com', telefono: '611666777', fotoUrl: '', relacion: 'padre' },
+  { id: 'padre-4', nombre: 'Sofía', apellidos: 'Romero Blanco', email: 'sofia@email.com', telefono: '611888999', fotoUrl: '', relacion: 'madre' },
+  { id: 'padre-5', nombre: 'Javier', apellidos: 'Serrano Ruiz', email: 'javier@email.com', telefono: '612111222', fotoUrl: '', relacion: 'padre' },
+  { id: 'padre-6', nombre: 'Laura', apellidos: 'Moreno Castro', email: 'laura.m@email.com', telefono: '612333444', fotoUrl: '', relacion: 'madre' },
+  { id: 'padre-7', nombre: 'Roberto', apellidos: 'Jiménez Vega', email: 'roberto@email.com', telefono: '612555666', fotoUrl: '', relacion: 'padre' },
+  { id: 'padre-8', nombre: 'Marta', apellidos: 'Álvarez Prieto', email: 'marta@email.com', telefono: '612777888', fotoUrl: '', relacion: 'madre' },
 ]
 
 // ============= ALUMNOS =============
 export const alumnos: Alumno[] = [
   // Aula Pollitos (0-1)
-  { id: 'alumno-1', aulaId: 'aula-1', nombre: 'Emma', apellidos: 'Hernández Torres', fechaNacimiento: '2025-06-15', fotoUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-1', 'padre-2'] },
-  { id: 'alumno-2', aulaId: 'aula-1', nombre: 'Leo', apellidos: 'Navarro Romero', fechaNacimiento: '2025-08-22', fotoUrl: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=200&h=200&fit=crop&crop=face', alergias: ['lactosa'], notasMedicas: 'Intolerancia a la lactosa. Leche de soja.', activo: true, padreIds: ['padre-3', 'padre-4'] },
-  { id: 'alumno-3', aulaId: 'aula-1', nombre: 'Olivia', apellidos: 'Serrano Moreno', fechaNacimiento: '2025-09-10', fotoUrl: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-5', 'padre-6'] },
+  { id: 'alumno-1', aulaId: 'aula-1', nombre: 'Emma', apellidos: 'Hernández Torres', fechaNacimiento: '2025-06-15', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-1', 'padre-2'] },
+  { id: 'alumno-2', aulaId: 'aula-1', nombre: 'Leo', apellidos: 'Navarro Romero', fechaNacimiento: '2025-08-22', fotoUrl: '', alergias: ['lactosa'], notasMedicas: 'Intolerancia a la lactosa. Leche de soja.', activo: true, padreIds: ['padre-3', 'padre-4'] },
+  { id: 'alumno-3', aulaId: 'aula-1', nombre: 'Olivia', apellidos: 'Serrano Moreno', fechaNacimiento: '2025-09-10', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-5', 'padre-6'] },
   // Aula Patitos (1-2)
-  { id: 'alumno-4', aulaId: 'aula-2', nombre: 'Lucía', apellidos: 'García Pérez', fechaNacimiento: '2024-11-03', fotoUrl: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-2'] },
-  { id: 'alumno-5', aulaId: 'aula-2', nombre: 'Mateo', apellidos: 'Jiménez Álvarez', fechaNacimiento: '2024-09-18', fotoUrl: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=200&h=200&fit=crop&crop=face', alergias: ['huevo'], notasMedicas: 'Alergia al huevo. Menú adaptado.', activo: true, padreIds: ['padre-7', 'padre-8'] },
-  { id: 'alumno-6', aulaId: 'aula-2', nombre: 'Sofía', apellidos: 'Moreno Castro', fechaNacimiento: '2024-12-25', fotoUrl: 'https://images.unsplash.com/photo-1566004100477-7b1e3e7e88fb?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-6'] },
-  { id: 'alumno-7', aulaId: 'aula-2', nombre: 'Pablo', apellidos: 'Torres Hernández', fechaNacimiento: '2025-01-14', fotoUrl: 'https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-1'] },
+  { id: 'alumno-4', aulaId: 'aula-2', nombre: 'Lucía', apellidos: 'García Pérez', fechaNacimiento: '2024-11-03', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-2'] },
+  { id: 'alumno-5', aulaId: 'aula-2', nombre: 'Mateo', apellidos: 'Jiménez Álvarez', fechaNacimiento: '2024-09-18', fotoUrl: '', alergias: ['huevo'], notasMedicas: 'Alergia al huevo. Menú adaptado.', activo: true, padreIds: ['padre-7', 'padre-8'] },
+  { id: 'alumno-6', aulaId: 'aula-2', nombre: 'Sofía', apellidos: 'Moreno Castro', fechaNacimiento: '2024-12-25', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-6'] },
+  { id: 'alumno-7', aulaId: 'aula-2', nombre: 'Pablo', apellidos: 'Torres Hernández', fechaNacimiento: '2025-01-14', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-1'] },
   // Aula Cisnes (2-3)
-  { id: 'alumno-8', aulaId: 'aula-3', nombre: 'Martín', apellidos: 'Romero Navarro', fechaNacimiento: '2023-07-20', fotoUrl: 'https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-4', 'padre-3'] },
-  { id: 'alumno-9', aulaId: 'aula-3', nombre: 'Valentina', apellidos: 'Álvarez Jiménez', fechaNacimiento: '2023-10-05', fotoUrl: 'https://images.unsplash.com/photo-1502781252888-9143f9486e44?w=200&h=200&fit=crop&crop=face', alergias: ['gluten'], notasMedicas: 'Celiaquía diagnosticada. Menú sin gluten.', activo: true, padreIds: ['padre-8', 'padre-7'] },
-  { id: 'alumno-10', aulaId: 'aula-3', nombre: 'Daniel', apellidos: 'Serrano Pérez', fechaNacimiento: '2023-05-30', fotoUrl: 'https://images.unsplash.com/photo-1542652694-40abf526446e?w=200&h=200&fit=crop&crop=face', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-5'] },
+  { id: 'alumno-8', aulaId: 'aula-3', nombre: 'Martín', apellidos: 'Romero Navarro', fechaNacimiento: '2023-07-20', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-4', 'padre-3'] },
+  { id: 'alumno-9', aulaId: 'aula-3', nombre: 'Valentina', apellidos: 'Álvarez Jiménez', fechaNacimiento: '2023-10-05', fotoUrl: '', alergias: ['gluten'], notasMedicas: 'Celiaquía diagnosticada. Menú sin gluten.', activo: true, padreIds: ['padre-8', 'padre-7'] },
+  { id: 'alumno-10', aulaId: 'aula-3', nombre: 'Daniel', apellidos: 'Serrano Pérez', fechaNacimiento: '2023-05-30', fotoUrl: '', alergias: [], notasMedicas: '', activo: true, padreIds: ['padre-5'] },
 ]
 
 // ============= HOY (para datos dinámicos) =============
@@ -218,12 +218,12 @@ export const asistencias: Asistencia[] = [
 
 // ============= FOTOS =============
 export const fotos: Foto[] = [
-  { id: 'foto-1', url: 'https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=600&h=400&fit=crop', descripcion: 'Taller de pintura con los dedos - ¡Creando arcoíris!', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6'], subidaPor: 'prof-2', aulaId: 'aula-2' },
-  { id: 'foto-2', url: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=400&fit=crop', descripcion: 'Jugando en el patio exterior', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
-  { id: 'foto-3', url: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&h=400&fit=crop', descripcion: 'Clase de música con instrumentos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
-  { id: 'foto-4', url: 'https://images.unsplash.com/photo-1484820540004-14229fe36ca4?w=600&h=400&fit=crop', descripcion: 'Hora del cuento en el aula', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9', 'alumno-10'], subidaPor: 'prof-3', aulaId: 'aula-3' },
-  { id: 'foto-5', url: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&h=400&fit=crop', descripcion: 'Manualidades con papel de colores', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9'], subidaPor: 'prof-3', aulaId: 'aula-3' },
-  { id: 'foto-6', url: 'https://images.unsplash.com/photo-1576349206613-01f44fd5fd6f?w=600&h=400&fit=crop', descripcion: 'Estimulación sensorial en el aula de bebés', fecha: hoyStr, alumnoIds: ['alumno-1', 'alumno-2', 'alumno-3'], subidaPor: 'prof-1', aulaId: 'aula-1' },
+  { id: 'foto-1', url: '/fotos/pintura.jpg', descripcion: 'Taller de pintura con los dedos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6'], subidaPor: 'prof-2', aulaId: 'aula-2' },
+  { id: 'foto-2', url: '/fotos/patio.jpg', descripcion: 'Jugando en el patio exterior', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
+  { id: 'foto-3', url: '/fotos/musica.jpg', descripcion: 'Clase de musica con instrumentos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
+  { id: 'foto-4', url: '/fotos/cuento.jpg', descripcion: 'Hora del cuento en el aula', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9', 'alumno-10'], subidaPor: 'prof-3', aulaId: 'aula-3' },
+  { id: 'foto-5', url: '/fotos/manualidades.jpg', descripcion: 'Manualidades con papel de colores', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9'], subidaPor: 'prof-3', aulaId: 'aula-3' },
+  { id: 'foto-6', url: '/fotos/bebes.jpg', descripcion: 'Estimulacion sensorial en el aula de bebes', fecha: hoyStr, alumnoIds: ['alumno-1', 'alumno-2', 'alumno-3'], subidaPor: 'prof-1', aulaId: 'aula-1' },
 ]
 
 // ============= NOTIFICACIONES =============

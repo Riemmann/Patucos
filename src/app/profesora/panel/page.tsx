@@ -1,21 +1,21 @@
 'use client'
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Users, CheckCircle, Clock, Camera, Bell, ClipboardList, MessageCircle } from "lucide-react"
-import { aulas, alumnos, getAlumnosByAula } from "@/lib/data"
+import { aulas, getAlumnosByAula } from "@/lib/data"
 import { useRegistros, useAsistencias } from "@/lib/use-demo-store"
 import { ESTADO_ANIMO_EMOJI } from "@/lib/constants"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
 
 const hoyStr = new Date().toISOString().split('T')[0]
 
 export default function ProfesoraPanelPage() {
-  const [aulaId, setAulaId] = useState('aula-2') // Default: Patitos
+  const [aulaId, setAulaId] = useState('aula-2')
   const registros = useRegistros()
   const asistencias = useAsistencias()
 
@@ -32,16 +32,19 @@ export default function ProfesoraPanelPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold">Panel del Aula</h1>
-        <p className="text-sm text-muted-foreground">{new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+        <h1 className="text-xl font-bold tracking-tight">Panel del Aula</h1>
+        <p className="text-sm text-muted-foreground capitalize">
+          {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+        </p>
       </div>
 
       {/* Classroom tabs */}
       <Tabs value={aulaId} onValueChange={setAulaId}>
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-3 h-10">
           {aulas.map(a => (
-            <TabsTrigger key={a.id} value={a.id} className="text-xs">
-              {a.emoji} {a.nombre} ({a.grupoEdad})
+            <TabsTrigger key={a.id} value={a.id} className="text-xs gap-1.5">
+              <span>{a.emoji}</span> {a.nombre}
+              <span className="text-muted-foreground">({a.grupoEdad})</span>
             </TabsTrigger>
           ))}
         </TabsList>
@@ -49,33 +52,39 @@ export default function ProfesoraPanelPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <Card>
+        <Card className="border-border/40">
           <CardContent className="p-4 text-center">
-            <Users className="w-5 h-5 mx-auto text-patuco-green" />
-            <p className="text-2xl font-bold mt-1">{presentes.length}/{alumnosAula.length}</p>
-            <p className="text-xs text-muted-foreground">Presentes</p>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center mx-auto">
+              <Users className="w-4 h-4 text-emerald-600" />
+            </div>
+            <p className="text-2xl font-bold mt-2 tabular-nums">{presentes.length}<span className="text-muted-foreground text-sm font-normal">/{alumnosAula.length}</span></p>
+            <p className="text-[11px] text-muted-foreground mt-0.5">Presentes</p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border-border/40">
           <CardContent className="p-4 text-center">
-            <Clock className="w-5 h-5 mx-auto text-patuco-orange" />
-            <p className="text-2xl font-bold mt-1">{pendientes}</p>
-            <p className="text-xs text-muted-foreground">Pendientes</p>
+            <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center mx-auto">
+              <Clock className="w-4 h-4 text-amber-600" />
+            </div>
+            <p className="text-2xl font-bold mt-2 tabular-nums">{pendientes}</p>
+            <p className="text-[11px] text-muted-foreground mt-0.5">Pendientes</p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border-border/40">
           <CardContent className="p-4 text-center">
-            <CheckCircle className="w-5 h-5 mx-auto text-patuco-blue" />
-            <p className="text-2xl font-bold mt-1">{conRegistro.length}</p>
-            <p className="text-xs text-muted-foreground">Completados</p>
+            <div className="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center mx-auto">
+              <CheckCircle className="w-4 h-4 text-sky-600" />
+            </div>
+            <p className="text-2xl font-bold mt-2 tabular-nums">{conRegistro.length}</p>
+            <p className="text-[11px] text-muted-foreground mt-0.5">Completados</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Student grid */}
       <div>
-        <h2 className="text-sm font-semibold mb-3">Alumnos</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">Alumnos</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
           {alumnosAula.map(alumno => {
             const asis = asistencias.find(a => a.alumnoId === alumno.id && a.fecha === hoyStr)
             const reg = registros.find(r => r.alumnoId === alumno.id && r.fecha === hoyStr)
@@ -85,31 +94,32 @@ export default function ProfesoraPanelPage() {
 
             return (
               <Link key={alumno.id} href={`/profesora/registro?alumno=${alumno.id}`}>
-                <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                  <CardContent className="p-3 text-center">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden mx-auto mb-2 border-2 border-border">
-                      <Image src={alumno.fotoUrl} alt={alumno.nombre} fill className="object-cover" />
-                    </div>
-                    <p className="text-xs font-medium truncate">{alumno.nombre} {alumno.apellidos.split(' ')[0]}</p>
-                    <div className="flex items-center justify-center gap-1 mt-2">
+                <Card className="hover:shadow-md transition-all cursor-pointer border-border/40 hover:border-border">
+                  <CardContent className="p-3.5 text-center">
+                    <AvatarIniciales nombre={alumno.nombre} apellidos={alumno.apellidos} size="lg" className="mx-auto" />
+                    <p className="text-[13px] font-medium mt-2.5 truncate">{alumno.nombre}</p>
+                    <p className="text-[11px] text-muted-foreground truncate">{alumno.apellidos.split(' ')[0]}</p>
+                    <div className="flex items-center justify-center gap-1.5 mt-2">
                       {presente ? (
-                        <Badge variant="secondary" className="bg-green-100 text-green-700 text-[10px]">Presente</Badge>
+                        <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 text-[10px] font-medium border-0">Presente</Badge>
                       ) : (
-                        <Badge variant="secondary" className="bg-gray-100 text-gray-500 text-[10px]">Ausente</Badge>
+                        <Badge variant="secondary" className="bg-gray-50 text-gray-400 text-[10px] border-0">Ausente</Badge>
                       )}
                     </div>
                     {reg && (
-                      <div className="flex items-center justify-center gap-1 mt-1">
-                        {reg.comidas.length > 0 && <span className="text-[10px]">🍽️{reg.comidas.length}/3</span>}
-                        {reg.siestas.length > 0 && <span className="text-[10px]">😴</span>}
-                        {ultimoAnimo && <span className="text-sm">{ESTADO_ANIMO_EMOJI[ultimoAnimo.estado]}</span>}
+                      <div className="flex items-center justify-center gap-1 mt-1.5 text-[11px] text-muted-foreground">
+                        {reg.comidas.length > 0 && <span>🍽️{reg.comidas.length}/3</span>}
+                        {reg.siestas.length > 0 && <span>😴</span>}
+                        {ultimoAnimo && <span>{ESTADO_ANIMO_EMOJI[ultimoAnimo.estado]}</span>}
                       </div>
                     )}
-                    {completado ? (
-                      <CheckCircle className="w-3 h-3 text-green-500 mx-auto mt-1" />
-                    ) : (
-                      <Clock className="w-3 h-3 text-orange-400 mx-auto mt-1" />
-                    )}
+                    <div className="mt-1.5">
+                      {completado ? (
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-500 mx-auto" />
+                      ) : (
+                        <Clock className="w-3.5 h-3.5 text-amber-400 mx-auto" />
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               </Link>
@@ -120,32 +130,23 @@ export default function ProfesoraPanelPage() {
 
       {/* Quick actions */}
       <div>
-        <h2 className="text-sm font-semibold mb-3">Acciones rapidas</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <Link href="/profesora/asistencia">
-            <Button variant="outline" className="w-full h-auto py-3 flex-col gap-1">
-              <ClipboardList className="w-5 h-5" />
-              <span className="text-xs">Asistencia</span>
-            </Button>
-          </Link>
-          <Link href="/profesora/fotos">
-            <Button variant="outline" className="w-full h-auto py-3 flex-col gap-1">
-              <Camera className="w-5 h-5" />
-              <span className="text-xs">Subir fotos</span>
-            </Button>
-          </Link>
-          <Link href="/profesora/notificaciones">
-            <Button variant="outline" className="w-full h-auto py-3 flex-col gap-1">
-              <Bell className="w-5 h-5" />
-              <span className="text-xs">Enviar aviso</span>
-            </Button>
-          </Link>
-          <Link href="/profesora/mensajes">
-            <Button variant="outline" className="w-full h-auto py-3 flex-col gap-1">
-              <MessageCircle className="w-5 h-5" />
-              <span className="text-xs">Mensajes</span>
-            </Button>
-          </Link>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">Acciones rapidas</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+          {[
+            { href: '/profesora/asistencia', icon: ClipboardList, label: 'Asistencia', color: 'text-emerald-600 bg-emerald-50' },
+            { href: '/profesora/fotos', icon: Camera, label: 'Subir fotos', color: 'text-sky-600 bg-sky-50' },
+            { href: '/profesora/notificaciones', icon: Bell, label: 'Enviar aviso', color: 'text-amber-600 bg-amber-50' },
+            { href: '/profesora/mensajes', icon: MessageCircle, label: 'Mensajes', color: 'text-violet-600 bg-violet-50' },
+          ].map(action => (
+            <Link key={action.href} href={action.href}>
+              <Button variant="outline" className="w-full h-auto py-3.5 flex-col gap-1.5 border-border/40 hover:border-border">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${action.color}`}>
+                  <action.icon className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-medium">{action.label}</span>
+              </Button>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

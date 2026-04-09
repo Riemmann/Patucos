@@ -1,10 +1,11 @@
 'use client'
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, ClipboardList, Users, Camera, ClipboardCheck, Bell, MessageCircle, ArrowLeft } from "lucide-react"
+import { LayoutDashboard, ClipboardList, Users, Camera, ClipboardCheck, Bell, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
+import { AvatarIniciales } from "@/components/shared/avatar-iniciales"
 
 const navItems = [
   { href: '/profesora/panel', label: 'Panel', icon: LayoutDashboard },
@@ -20,18 +21,20 @@ export default function ProfesoraLayout({ children }: { children: React.ReactNod
   const pathname = usePathname()
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-[#FAFAF8]">
       {/* Sidebar - desktop */}
-      <aside className="hidden md:flex w-56 flex-col border-r border-border bg-white p-4">
-        <Link href="/" className="flex items-center gap-2 mb-6 px-2">
-          <span className="text-2xl">🐥</span>
+      <aside className="hidden md:flex w-[220px] flex-col border-r border-border/40 bg-white p-4">
+        <Link href="/" className="flex items-center gap-2.5 mb-8 px-2">
+          <div className="w-9 h-9 relative flex-shrink-0">
+            <Image src="/logo-patuco.jpg" alt="Patuco" fill className="object-contain rounded-lg" />
+          </div>
           <div>
-            <p className="text-sm font-bold leading-tight">Patuco App</p>
+            <p className="text-[13px] font-bold leading-tight">Patuco</p>
             <p className="text-[10px] text-muted-foreground">Panel Profesora</p>
           </div>
         </Link>
 
-        <nav className="space-y-1 flex-1">
+        <nav className="space-y-0.5 flex-1">
           {navItems.map(item => {
             const isActive = pathname.startsWith(item.href)
             return (
@@ -39,43 +42,40 @@ export default function ProfesoraLayout({ children }: { children: React.ReactNod
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+                  "flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-colors",
                   isActive
-                    ? "bg-patuco-green-light text-patuco-green font-medium"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "bg-emerald-50 text-emerald-700 font-medium"
+                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                 )}
               >
-                <item.icon className="w-4 h-4" />
+                <item.icon className="w-4 h-4" strokeWidth={isActive ? 2.2 : 1.6} />
                 {item.label}
               </Link>
             )
           })}
         </nav>
 
-        <div className="border-t pt-3 mt-3">
-          <div className="flex items-center gap-2 px-2">
-            <div className="w-8 h-8 rounded-full bg-patuco-green-light flex items-center justify-center text-sm">MG</div>
+        <div className="border-t border-border/40 pt-3 mt-3">
+          <div className="flex items-center gap-2.5 px-2">
+            <AvatarIniciales nombre="Maria" apellidos="Garcia" size="sm" />
             <div>
               <p className="text-xs font-medium">Maria Garcia</p>
-              <p className="text-[10px] text-muted-foreground">Profesora · Patitos</p>
+              <p className="text-[10px] text-muted-foreground">Aula Patitos</p>
             </div>
           </div>
         </div>
       </aside>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile header */}
-        <header className="md:hidden sticky top-0 z-50 bg-white border-b border-border px-4 py-3">
+        <header className="md:hidden sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/40 px-4 py-2.5">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-muted-foreground">
-              <ArrowLeft className="w-5 h-5" />
+            <Link href="/" className="w-8 h-8 relative">
+              <Image src="/logo-patuco.jpg" alt="Patuco" fill className="object-contain rounded-lg" />
             </Link>
-            <div className="flex items-center gap-2">
-              <span className="text-xl">🐥</span>
-              <span className="text-sm font-bold">Patuco · Profesora</span>
-            </div>
-            <div className="w-5" />
+            <span className="text-sm font-semibold">Panel Profesora</span>
+            <AvatarIniciales nombre="Maria" apellidos="Garcia" size="sm" />
           </div>
         </header>
 
@@ -84,7 +84,7 @@ export default function ProfesoraLayout({ children }: { children: React.ReactNod
         </main>
 
         {/* Mobile bottom nav */}
-        <nav className="md:hidden sticky bottom-0 bg-white border-t border-border px-1 py-1">
+        <nav className="md:hidden sticky bottom-0 bg-white/90 backdrop-blur-md border-t border-border/40 px-1 pb-[env(safe-area-inset-bottom)]">
           <div className="flex justify-around">
             {navItems.slice(0, 5).map(item => {
               const isActive = pathname.startsWith(item.href)
@@ -93,11 +93,11 @@ export default function ProfesoraLayout({ children }: { children: React.ReactNod
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex flex-col items-center gap-0.5 px-2 py-2 rounded-lg text-[10px] transition-colors",
-                    isActive ? "text-patuco-green font-medium" : "text-muted-foreground"
+                    "flex flex-col items-center gap-0.5 px-2 py-2.5 text-[10px] transition-colors",
+                    isActive ? "text-emerald-600 font-medium" : "text-muted-foreground/70"
                   )}
                 >
-                  <item.icon className="w-5 h-5" />
+                  <item.icon className={cn("w-[22px] h-[22px]", isActive ? "text-emerald-600" : "text-muted-foreground/50")} strokeWidth={isActive ? 2.2 : 1.6} />
                   <span>{item.label}</span>
                 </Link>
               )
