@@ -218,12 +218,12 @@ export const asistencias: Asistencia[] = [
 
 // ============= FOTOS =============
 export const fotos: Foto[] = [
-  { id: 'foto-1', url: '/fotos/pintura.jpg', descripcion: 'Taller de pintura con los dedos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6'], subidaPor: 'prof-2', aulaId: 'aula-2' },
-  { id: 'foto-2', url: '/fotos/patio.jpg', descripcion: 'Jugando en el patio exterior', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
-  { id: 'foto-3', url: '/fotos/musica.jpg', descripcion: 'Clase de musica con instrumentos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
-  { id: 'foto-4', url: '/fotos/cuento.jpg', descripcion: 'Hora del cuento en el aula', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9', 'alumno-10'], subidaPor: 'prof-3', aulaId: 'aula-3' },
-  { id: 'foto-5', url: '/fotos/manualidades.jpg', descripcion: 'Manualidades con papel de colores', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9'], subidaPor: 'prof-3', aulaId: 'aula-3' },
-  { id: 'foto-6', url: '/fotos/bebes.jpg', descripcion: 'Estimulacion sensorial en el aula de bebes', fecha: hoyStr, alumnoIds: ['alumno-1', 'alumno-2', 'alumno-3'], subidaPor: 'prof-1', aulaId: 'aula-1' },
+  { id: 'foto-1', url: '/fotos/Pintura.png', descripcion: 'Taller de pintura con los dedos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6'], subidaPor: 'prof-2', aulaId: 'aula-2' },
+  { id: 'foto-2', url: '/fotos/Patio.png', descripcion: 'Jugando en el patio exterior', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
+  { id: 'foto-3', url: '/fotos/Musica.png', descripcion: 'Clase de musica con instrumentos', fecha: hoyStr, alumnoIds: ['alumno-4', 'alumno-5', 'alumno-6', 'alumno-7'], subidaPor: 'prof-2', aulaId: 'aula-2' },
+  { id: 'foto-4', url: '/fotos/Cuento.png', descripcion: 'Hora del cuento en el aula', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9', 'alumno-10'], subidaPor: 'prof-3', aulaId: 'aula-3' },
+  { id: 'foto-5', url: '/fotos/Manualidades.png', descripcion: 'Manualidades con papel de colores', fecha: hoyStr, alumnoIds: ['alumno-8', 'alumno-9'], subidaPor: 'prof-3', aulaId: 'aula-3' },
+  { id: 'foto-6', url: '/fotos/Bebes.png', descripcion: 'Estimulacion sensorial en el aula de bebes', fecha: hoyStr, alumnoIds: ['alumno-1', 'alumno-2', 'alumno-3'], subidaPor: 'prof-1', aulaId: 'aula-1' },
 ]
 
 // ============= NOTIFICACIONES =============
