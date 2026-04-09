@@ -60,11 +60,11 @@ export const demoStore = {
     }
     notify()
   },
-  toggleAsistenciaSalida(alumnoId: string, fecha: string, hora: string) {
+  toggleAsistenciaSalida(alumnoId: string, fecha: string, hora: string, recogidoPor?: string) {
     const existing = _asistencias.find(a => a.alumnoId === alumnoId && a.fecha === fecha)
     if (existing) {
       _asistencias = _asistencias.map(a =>
-        a.id === existing.id ? { ...a, horaSalida: a.horaSalida ? null : hora } : a
+        a.id === existing.id ? { ...a, horaSalida: a.horaSalida ? null : hora, recogidoPor: recogidoPor || a.recogidoPor } : a
       )
     }
     notify()

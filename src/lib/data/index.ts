@@ -1,7 +1,7 @@
 import type {
   Centro, Aula, Profesor, Padre, Alumno, RegistroDiario, Foto,
   Notificacion, Mensaje, MenuSemanal, Asistencia, Comida, Siesta,
-  Panal, Actividad, EstadoAnimoEntry, TimelineEvent
+  Panal, Actividad, EstadoAnimoEntry, TimelineEvent, Evento, PersonaAutorizada
 } from '../types'
 
 // ============= CENTRO =============
@@ -260,6 +260,132 @@ export const menuSemanal: MenuSemanal = {
     { dia: 'viernes', desayuno: 'Tostada con tomate', primerPlato: 'Arroz con verduras', segundoPlato: 'Filete de pavo con ensalada', postre: 'Yogur', merienda: 'Bizcocho casero' },
   ],
 }
+
+// ============= PERSONAS AUTORIZADAS (por alumno) =============
+export const personasAutorizadas: Record<string, PersonaAutorizada[]> = {
+  'alumno-1': [
+    { nombre: 'Carlos Hernández', relacion: 'Padre', telefono: '611222333' },
+    { nombre: 'Elena Torres', relacion: 'Madre', telefono: '611444555' },
+    { nombre: 'Rosa Díaz', relacion: 'Abuela', telefono: '611999000' },
+  ],
+  'alumno-2': [
+    { nombre: 'Miguel Navarro', relacion: 'Padre', telefono: '611666777' },
+    { nombre: 'Sofía Romero', relacion: 'Madre', telefono: '611888999' },
+  ],
+  'alumno-3': [
+    { nombre: 'Javier Serrano', relacion: 'Padre', telefono: '612111222' },
+    { nombre: 'Laura Moreno', relacion: 'Madre', telefono: '612333444' },
+  ],
+  'alumno-4': [
+    { nombre: 'Elena Torres', relacion: 'Madre', telefono: '611444555' },
+    { nombre: 'Carlos Hernández', relacion: 'Padre', telefono: '611222333' },
+    { nombre: 'Carmen Torres', relacion: 'Abuela', telefono: '611000111' },
+  ],
+  'alumno-5': [
+    { nombre: 'Roberto Jiménez', relacion: 'Padre', telefono: '612555666' },
+    { nombre: 'Marta Álvarez', relacion: 'Madre', telefono: '612777888' },
+  ],
+  'alumno-6': [
+    { nombre: 'Laura Moreno', relacion: 'Madre', telefono: '612333444' },
+  ],
+  'alumno-7': [
+    { nombre: 'Carlos Hernández', relacion: 'Padre', telefono: '611222333' },
+  ],
+  'alumno-8': [
+    { nombre: 'Sofía Romero', relacion: 'Madre', telefono: '611888999' },
+    { nombre: 'Miguel Navarro', relacion: 'Padre', telefono: '611666777' },
+    { nombre: 'Antonio Romero', relacion: 'Abuelo', telefono: '611222000' },
+  ],
+  'alumno-9': [
+    { nombre: 'Marta Álvarez', relacion: 'Madre', telefono: '612777888' },
+    { nombre: 'Roberto Jiménez', relacion: 'Padre', telefono: '612555666' },
+  ],
+  'alumno-10': [
+    { nombre: 'Javier Serrano', relacion: 'Padre', telefono: '612111222' },
+  ],
+}
+
+// ============= EVENTOS DEL CENTRO =============
+export const eventos: Evento[] = [
+  { id: 'ev-1', titulo: 'Fiesta de Primavera', descripcion: 'Actuaciones de los ninos, talleres para familias y merienda compartida. Todos los papas y mamas estan invitados.', fecha: '2026-04-18', tipo: 'fiesta' },
+  { id: 'ev-2', titulo: 'Reunion de padres - Aula Patitos', descripcion: 'Reunion trimestral con la profesora Maria. Hablaremos del progreso de los ninos y los objetivos del proximo trimestre.', fecha: '2026-04-22', tipo: 'reunion', aulaId: 'aula-2' },
+  { id: 'ev-3', titulo: 'Excursion a la Granja Escuela', descripcion: 'Los Cisnes (2-3 anos) visitaran la Granja Escuela El Alamo. Llevar ropa comoda y gorra.', fecha: '2026-04-25', tipo: 'excursion', aulaId: 'aula-3' },
+  { id: 'ev-4', titulo: 'Festivo - Dia del Trabajo', descripcion: 'El centro permanecera cerrado el 1 de mayo.', fecha: '2026-05-01', tipo: 'festivo' },
+  { id: 'ev-5', titulo: 'Taller de cocina con familias', descripcion: 'Taller de cocina saludable para padres y ninos. Haremos galletas de avena y zumos naturales.', fecha: '2026-05-09', tipo: 'taller' },
+  { id: 'ev-6', titulo: 'Festivo - San Isidro', descripcion: 'El centro permanecera cerrado el 15 de mayo por la festividad de San Isidro.', fecha: '2026-05-15', tipo: 'festivo' },
+  { id: 'ev-7', titulo: 'Fiesta fin de curso', descripcion: 'Celebracion de fin de curso con actuaciones, diplomas y merienda. Familias invitadas a las 16:00.', fecha: '2026-06-19', tipo: 'fiesta' },
+  { id: 'ev-8', titulo: 'Reunion de padres - Aula Pollitos', descripcion: 'Reunion trimestral con la profesora Carmen.', fecha: '2026-04-23', tipo: 'reunion', aulaId: 'aula-1' },
+]
+
+// ============= REGISTROS HISTORICOS (para estadisticas de Lucia - alumno-4) =============
+function daysAgo(n: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() - n)
+  return d.toISOString().split('T')[0]
+}
+
+export const registrosHistoricos: RegistroDiario[] = [
+  {
+    id: 'reg-hist-1', alumnoId: 'alumno-4', fecha: daysAgo(1), profesorId: 'prof-2', comentarioGeneral: 'Buen dia.',
+    comidas: [
+      { id: 'h1-c1', tipo: 'desayuno', cantidad: 'mucho', notas: '', hora: '09:30' },
+      { id: 'h1-c2', tipo: 'almuerzo', cantidad: 'normal', notas: '', hora: '12:15' },
+      { id: 'h1-c3', tipo: 'merienda', cantidad: 'todo', notas: '', hora: '16:00' },
+    ],
+    siestas: [{ id: 'h1-s1', horaInicio: '13:00', horaFin: '14:40', calidad: 'bien', notas: '' }],
+    panales: [], actividades: [],
+    estadosAnimo: [
+      { id: 'h1-ea1', momento: 'manana', estado: 'contento', notas: '' },
+      { id: 'h1-ea2', momento: 'mediodia', estado: 'contento', notas: '' },
+      { id: 'h1-ea3', momento: 'tarde', estado: 'muy_contento', notas: '' },
+    ],
+  },
+  {
+    id: 'reg-hist-2', alumnoId: 'alumno-4', fecha: daysAgo(2), profesorId: 'prof-2', comentarioGeneral: 'Un poco cansada.',
+    comidas: [
+      { id: 'h2-c1', tipo: 'desayuno', cantidad: 'todo', notas: '', hora: '09:30' },
+      { id: 'h2-c2', tipo: 'almuerzo', cantidad: 'poco', notas: 'No tenia hambre', hora: '12:15' },
+      { id: 'h2-c3', tipo: 'merienda', cantidad: 'normal', notas: '', hora: '16:00' },
+    ],
+    siestas: [{ id: 'h2-s1', horaInicio: '12:45', horaFin: '14:50', calidad: 'bien', notas: '' }],
+    panales: [], actividades: [],
+    estadosAnimo: [
+      { id: 'h2-ea1', momento: 'manana', estado: 'neutral', notas: '' },
+      { id: 'h2-ea2', momento: 'mediodia', estado: 'contento', notas: '' },
+      { id: 'h2-ea3', momento: 'tarde', estado: 'triste', notas: 'Un poco cansada' },
+    ],
+  },
+  {
+    id: 'reg-hist-3', alumnoId: 'alumno-4', fecha: daysAgo(3), profesorId: 'prof-2', comentarioGeneral: 'Dia estupendo.',
+    comidas: [
+      { id: 'h3-c1', tipo: 'desayuno', cantidad: 'todo', notas: '', hora: '09:30' },
+      { id: 'h3-c2', tipo: 'almuerzo', cantidad: 'todo', notas: '', hora: '12:15' },
+      { id: 'h3-c3', tipo: 'merienda', cantidad: 'mucho', notas: '', hora: '16:00' },
+    ],
+    siestas: [{ id: 'h3-s1', horaInicio: '12:50', horaFin: '14:20', calidad: 'regular', notas: '' }],
+    panales: [], actividades: [],
+    estadosAnimo: [
+      { id: 'h3-ea1', momento: 'manana', estado: 'muy_contento', notas: '' },
+      { id: 'h3-ea2', momento: 'mediodia', estado: 'muy_contento', notas: '' },
+      { id: 'h3-ea3', momento: 'tarde', estado: 'contento', notas: '' },
+    ],
+  },
+  {
+    id: 'reg-hist-4', alumnoId: 'alumno-4', fecha: daysAgo(4), profesorId: 'prof-2', comentarioGeneral: 'Dia normal.',
+    comidas: [
+      { id: 'h4-c1', tipo: 'desayuno', cantidad: 'normal', notas: '', hora: '09:30' },
+      { id: 'h4-c2', tipo: 'almuerzo', cantidad: 'mucho', notas: '', hora: '12:15' },
+      { id: 'h4-c3', tipo: 'merienda', cantidad: 'poco', notas: '', hora: '16:00' },
+    ],
+    siestas: [{ id: 'h4-s1', horaInicio: '13:10', horaFin: '14:30', calidad: 'bien', notas: '' }],
+    panales: [], actividades: [],
+    estadosAnimo: [
+      { id: 'h4-ea1', momento: 'manana', estado: 'contento', notas: '' },
+      { id: 'h4-ea2', momento: 'mediodia', estado: 'neutral', notas: '' },
+      { id: 'h4-ea3', momento: 'tarde', estado: 'contento', notas: '' },
+    ],
+  },
+]
 
 // ============= HELPERS =============
 

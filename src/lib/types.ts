@@ -176,6 +176,25 @@ export interface MenuSemanal {
   dias: MenuDia[]
 }
 
+// === Eventos del centro ===
+export type TipoEvento = 'fiesta' | 'reunion' | 'excursion' | 'festivo' | 'taller' | 'otro'
+
+export interface Evento {
+  id: string
+  titulo: string
+  descripcion: string
+  fecha: string
+  tipo: TipoEvento
+  aulaId?: string // null = todo el centro
+}
+
+// === Personas autorizadas ===
+export interface PersonaAutorizada {
+  nombre: string
+  relacion: string
+  telefono: string
+}
+
 // === Timeline event (for parent view) ===
 export type TimelineEventType = 'entrada' | 'comida' | 'siesta' | 'panal' | 'actividad' | 'estado_animo' | 'foto' | 'salida' | 'comentario'
 

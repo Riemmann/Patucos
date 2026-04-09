@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Home, CalendarDays, Camera, UtensilsCrossed, MessageCircle, Bell } from "lucide-react"
+import { Home, CalendarDays, Camera, BarChart3, CalendarHeart, MessageCircle, Bell } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useNotificaciones } from "@/lib/use-demo-store"
 import { alumnos, getAula } from "@/lib/data"
@@ -14,10 +14,10 @@ const DEMO_AULA = getAula(DEMO_ALUMNO.aulaId)!
 const navItems = [
   { href: '/padre/inicio', label: 'Inicio', icon: Home },
   { href: '/padre/dia', label: 'Dia', icon: CalendarDays },
+  { href: '/padre/estadisticas', label: 'Stats', icon: BarChart3 },
   { href: '/padre/fotos', label: 'Fotos', icon: Camera },
-  { href: '/padre/menu', label: 'Menu', icon: UtensilsCrossed },
+  { href: '/padre/calendario', label: 'Agenda', icon: CalendarHeart },
   { href: '/padre/mensajes', label: 'Chat', icon: MessageCircle },
-  { href: '/padre/notificaciones', label: 'Avisos', icon: Bell },
 ]
 
 export default function PadreLayout({ children }: { children: React.ReactNode }) {

@@ -1,4 +1,4 @@
-import type { CantidadComida, TipoComida, CalidadSiesta, TipoPanal, TipoActividad, MomentoAnimo, EstadoAnimo, TipoNotificacion, Prioridad, DiaSemana } from './types'
+import type { CantidadComida, TipoComida, CalidadSiesta, TipoPanal, TipoActividad, MomentoAnimo, EstadoAnimo, TipoNotificacion, Prioridad, DiaSemana, TipoEvento } from './types'
 
 export const CANTIDAD_LABELS: Record<CantidadComida, string> = {
   nada: 'Nada',
@@ -138,4 +138,31 @@ export const DIA_LABELS: Record<DiaSemana, string> = {
   miercoles: 'Miércoles',
   jueves: 'Jueves',
   viernes: 'Viernes',
+}
+
+export const TIPO_EVENTO_LABELS: Record<TipoEvento, string> = {
+  fiesta: 'Fiesta',
+  reunion: 'Reunion',
+  excursion: 'Excursion',
+  festivo: 'Festivo',
+  taller: 'Taller',
+  otro: 'Otro',
+}
+
+export const TIPO_EVENTO_EMOJI: Record<TipoEvento, string> = {
+  fiesta: '🎉',
+  reunion: '👥',
+  excursion: '🚌',
+  festivo: '📅',
+  taller: '🎨',
+  otro: '📌',
+}
+
+export const TIPO_EVENTO_COLORS: Record<TipoEvento, string> = {
+  fiesta: 'bg-pink-100 text-pink-700',
+  reunion: 'bg-blue-100 text-blue-700',
+  excursion: 'bg-emerald-100 text-emerald-700',
+  festivo: 'bg-amber-100 text-amber-700',
+  taller: 'bg-violet-100 text-violet-700',
+  otro: 'bg-gray-100 text-gray-700',
 }
