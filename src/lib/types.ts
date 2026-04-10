@@ -52,6 +52,8 @@ export interface Padre {
   telefono: string
   fotoUrl: string
   relacion: Relacion
+  accesoActivo?: boolean
+  fechaAcceso?: string
 }
 
 export interface Alumno {

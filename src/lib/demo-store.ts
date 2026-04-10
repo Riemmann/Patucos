@@ -1,28 +1,15 @@
 'use client'
 
-import type { RegistroDiario, Asistencia, Notificacion, Mensaje } from './types'
-import { registrosDiarios as initialRegistros, asistencias as initialAsistencias, notificaciones as initialNotificaciones, mensajes as initialMensajes } from './data'
-
-interface DemoStore {
-  registros: RegistroDiario[]
-  asistencias: Asistencia[]
-  notificaciones: Notificacion[]
-  mensajes: Mensaje[]
-  updateRegistro: (registro: RegistroDiario) => void
-  addRegistro: (registro: RegistroDiario) => void
-  toggleAsistencia: (alumnoId: string, fecha: string) => void
-  addNotificacion: (notif: Notificacion) => void
-  markNotificacionLeida: (id: string) => void
-  addMensaje: (msg: Mensaje) => void
-}
-
-// Simple store without zustand dependency - using React context instead
-// But we need a global mutable store for the demo to work across routes
+import type { RegistroDiario, Asistencia, Notificacion, Mensaje, Alumno, Profesor, Padre } from './types'
+import { registrosDiarios as initialRegistros, asistencias as initialAsistencias, notificaciones as initialNotificaciones, mensajes as initialMensajes, alumnos as initialAlumnos, profesores as initialProfesores, padres as initialPadres } from './data'
 
 let _registros = [...initialRegistros]
 let _asistencias = [...initialAsistencias]
 let _notificaciones = [...initialNotificaciones]
 let _mensajes = [...initialMensajes]
+let _alumnos = [...initialAlumnos]
+let _profesores = [...initialProfesores]
+let _padres = [...initialPadres]
 let _listeners: (() => void)[] = []
 
 function notify() {
@@ -40,7 +27,11 @@ export const demoStore = {
   getAsistencias: () => _asistencias,
   getNotificaciones: () => _notificaciones,
   getMensajes: () => _mensajes,
+  getAlumnos: () => _alumnos,
+  getProfesores: () => _profesores,
+  getPadres: () => _padres,
 
+  // --- Registros ---
   updateRegistro(registro: RegistroDiario) {
     _registros = _registros.map(r => r.id === registro.id ? registro : r)
     notify()
@@ -49,6 +40,8 @@ export const demoStore = {
     _registros = [..._registros, registro]
     notify()
   },
+
+  // --- Asistencia ---
   toggleAsistenciaEntrada(alumnoId: string, fecha: string, hora: string) {
     const existing = _asistencias.find(a => a.alumnoId === alumnoId && a.fecha === fecha)
     if (existing) {
@@ -69,6 +62,8 @@ export const demoStore = {
     }
     notify()
   },
+
+  // --- Notificaciones ---
   addNotificacion(notif: Notificacion) {
     _notificaciones = [notif, ..._notificaciones]
     notify()
@@ -77,11 +72,36 @@ export const demoStore = {
     _notificaciones = _notificaciones.map(n => n.id === id ? { ...n, leida: true } : n)
     notify()
   },
+
+  // --- Mensajes ---
   addMensaje(msg: Mensaje) {
     _mensajes = [..._mensajes, msg]
     notify()
   },
 
+  // --- Direccion: Gestion alumnos ---
+  updateAlumnoAula(alumnoId: string, aulaId: string) {
+    _alumnos = _alumnos.map(a => a.id === alumnoId ? { ...a, aulaId } : a)
+    notify()
+  },
+
+  // --- Direccion: Gestion profesoras ---
+  updateProfesorAula(profesorId: string, aulaId: string | null) {
+    _profesores = _profesores.map(p => p.id === profesorId ? { ...p, aulaId } : p)
+    notify()
+  },
+
+  // --- Direccion: Acceso familias ---
+  activarAccesoPadre(padreId: string) {
+    _padres = _padres.map(p => p.id === padreId ? { ...p, accesoActivo: true, fechaAcceso: new Date().toISOString() } : p)
+    notify()
+  },
+  desactivarAccesoPadre(padreId: string) {
+    _padres = _padres.map(p => p.id === padreId ? { ...p, accesoActivo: false } : p)
+    notify()
+  },
+
+  // --- Helpers ---
   getRegistro(alumnoId: string, fecha: string): RegistroDiario | undefined {
     return _registros.find(r => r.alumnoId === alumnoId && r.fecha === fecha)
   },

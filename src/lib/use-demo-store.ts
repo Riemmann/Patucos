@@ -1,8 +1,7 @@
 'use client'
 
-import { useSyncExternalStore, useCallback } from 'react'
+import { useSyncExternalStore } from 'react'
 import { demoStore } from './demo-store'
-import type { RegistroDiario, Notificacion, Mensaje } from './types'
 
 export function useRegistros() {
   return useSyncExternalStore(demoStore.subscribe, demoStore.getRegistros, demoStore.getRegistros)
@@ -18,6 +17,18 @@ export function useNotificaciones() {
 
 export function useMensajes() {
   return useSyncExternalStore(demoStore.subscribe, demoStore.getMensajes, demoStore.getMensajes)
+}
+
+export function useAlumnos() {
+  return useSyncExternalStore(demoStore.subscribe, demoStore.getAlumnos, demoStore.getAlumnos)
+}
+
+export function useProfesores() {
+  return useSyncExternalStore(demoStore.subscribe, demoStore.getProfesores, demoStore.getProfesores)
+}
+
+export function usePadres() {
+  return useSyncExternalStore(demoStore.subscribe, demoStore.getPadres, demoStore.getPadres)
 }
 
 export function useRegistro(alumnoId: string, fecha: string) {
@@ -39,5 +50,9 @@ export function useDemoActions() {
     addNotificacion: demoStore.addNotificacion,
     markNotificacionLeida: demoStore.markNotificacionLeida,
     addMensaje: demoStore.addMensaje,
+    updateAlumnoAula: demoStore.updateAlumnoAula,
+    updateProfesorAula: demoStore.updateProfesorAula,
+    activarAccesoPadre: demoStore.activarAccesoPadre,
+    desactivarAccesoPadre: demoStore.desactivarAccesoPadre,
   }
 }
