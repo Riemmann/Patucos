@@ -2,6 +2,15 @@
 
 Todos los cambios relevantes del proyecto Patuco App.
 
+## [0.5.0] - 2026-04-10
+
+### PWA: Instalable en pantalla de inicio
+- `manifest.json` con `short_name: "Escuela Patuco"` y `display: standalone`
+- Iconos del logo de Patuco generados en 192x192, 512x512 y apple-touch-icon 180x180
+- Metadata actualizada: titulo corto, apple-web-app capable, theme-color dorado
+- Viewport configurado para comportamiento de app movil (sin zoom)
+- Al anadir a pantalla de inicio muestra "Escuela Patuco" con el logo del pato
+
 ## [0.4.0] - 2026-04-10
 
 ### Panel de Direccion
