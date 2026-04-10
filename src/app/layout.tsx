@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
@@ -8,8 +8,26 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Patuco App - Escuela Infantil Patuco",
-  description: "App de comunicación para familias y profesoras de Escuela Infantil Patuco",
+  title: "Escuela Patuco",
+  description: "Agenda Digital - Escuela Infantil Patuco",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Escuela Patuco",
+  },
+  icons: {
+    icon: "/icon-192.png",
+    apple: "/apple-touch-icon.png",
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#F5C542",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
