@@ -1,7 +1,7 @@
 import type {
   Centro, Aula, Profesor, Padre, Alumno, RegistroDiario, Foto,
   Notificacion, Mensaje, MenuSemanal, Asistencia, Comida, Siesta,
-  Panal, Actividad, EstadoAnimoEntry, TimelineEvent, Evento, PersonaAutorizada
+  Panal, Actividad, EstadoAnimoEntry, TimelineEvent, Evento, PersonaAutorizada, Consentimiento
 } from '../types'
 
 // ============= CENTRO =============
@@ -315,6 +315,14 @@ export const eventos: Evento[] = [
   { id: 'ev-6', titulo: 'Festivo - San Isidro', descripcion: 'El centro permanecera cerrado el 15 de mayo por la festividad de San Isidro.', fecha: '2026-05-15', tipo: 'festivo' },
   { id: 'ev-7', titulo: 'Fiesta fin de curso', descripcion: 'Celebracion de fin de curso con actuaciones, diplomas y merienda. Familias invitadas a las 16:00.', fecha: '2026-06-19', tipo: 'fiesta' },
   { id: 'ev-8', titulo: 'Reunion de padres - Aula Pollitos', descripcion: 'Reunion trimestral con la profesora Carmen.', fecha: '2026-04-23', tipo: 'reunion', aulaId: 'aula-1' },
+]
+
+// ============= CONSENTIMIENTOS LOPD =============
+export const consentimientos: Consentimiento[] = [
+  // Algunos padres ya tienen consentimientos firmados (para demo)
+  { id: 'cons-1', padreId: 'padre-2', alumnoId: 'alumno-4', tipo: 'datos_personales', aceptado: true, fecha: '2025-09-01' },
+  { id: 'cons-2', padreId: 'padre-2', alumnoId: 'alumno-4', tipo: 'imagenes', aceptado: true, fecha: '2025-09-01' },
+  { id: 'cons-3', padreId: 'padre-2', alumnoId: 'alumno-4', tipo: 'comunicaciones', aceptado: true, fecha: '2025-09-01' },
 ]
 
 // ============= REGISTROS HISTORICOS (para estadisticas de Lucia - alumno-4) =============

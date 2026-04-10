@@ -31,6 +31,10 @@ export function usePadres() {
   return useSyncExternalStore(demoStore.subscribe, demoStore.getPadres, demoStore.getPadres)
 }
 
+export function useConsentimientos() {
+  return useSyncExternalStore(demoStore.subscribe, demoStore.getConsentimientos, demoStore.getConsentimientos)
+}
+
 export function useRegistro(alumnoId: string, fecha: string) {
   const registros = useRegistros()
   return registros.find(r => r.alumnoId === alumnoId && r.fecha === fecha)
@@ -54,5 +58,7 @@ export function useDemoActions() {
     updateProfesorAula: demoStore.updateProfesorAula,
     activarAccesoPadre: demoStore.activarAccesoPadre,
     desactivarAccesoPadre: demoStore.desactivarAccesoPadre,
+    addConsentimiento: demoStore.addConsentimiento,
+    updateConsentimiento: demoStore.updateConsentimiento,
   }
 }

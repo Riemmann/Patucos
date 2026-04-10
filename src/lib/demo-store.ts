@@ -1,7 +1,7 @@
 'use client'
 
-import type { RegistroDiario, Asistencia, Notificacion, Mensaje, Alumno, Profesor, Padre } from './types'
-import { registrosDiarios as initialRegistros, asistencias as initialAsistencias, notificaciones as initialNotificaciones, mensajes as initialMensajes, alumnos as initialAlumnos, profesores as initialProfesores, padres as initialPadres } from './data'
+import type { RegistroDiario, Asistencia, Notificacion, Mensaje, Alumno, Profesor, Padre, Consentimiento } from './types'
+import { registrosDiarios as initialRegistros, asistencias as initialAsistencias, notificaciones as initialNotificaciones, mensajes as initialMensajes, alumnos as initialAlumnos, profesores as initialProfesores, padres as initialPadres, consentimientos as initialConsentimientos } from './data'
 
 let _registros = [...initialRegistros]
 let _asistencias = [...initialAsistencias]
@@ -10,6 +10,7 @@ let _mensajes = [...initialMensajes]
 let _alumnos = [...initialAlumnos]
 let _profesores = [...initialProfesores]
 let _padres = [...initialPadres]
+let _consentimientos = [...initialConsentimientos]
 let _listeners: (() => void)[] = []
 
 function notify() {
@@ -30,6 +31,7 @@ export const demoStore = {
   getAlumnos: () => _alumnos,
   getProfesores: () => _profesores,
   getPadres: () => _padres,
+  getConsentimientos: () => _consentimientos,
 
   // --- Registros ---
   updateRegistro(registro: RegistroDiario) {
@@ -98,6 +100,16 @@ export const demoStore = {
   },
   desactivarAccesoPadre(padreId: string) {
     _padres = _padres.map(p => p.id === padreId ? { ...p, accesoActivo: false } : p)
+    notify()
+  },
+
+  // --- Consentimientos LOPD ---
+  addConsentimiento(cons: Consentimiento) {
+    _consentimientos = [..._consentimientos, cons]
+    notify()
+  },
+  updateConsentimiento(id: string, aceptado: boolean) {
+    _consentimientos = _consentimientos.map(c => c.id === id ? { ...c, aceptado, fecha: new Date().toISOString().split('T')[0] } : c)
     notify()
   },
 

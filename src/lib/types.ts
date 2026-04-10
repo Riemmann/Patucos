@@ -190,6 +190,16 @@ export interface Evento {
   aulaId?: string // null = todo el centro
 }
 
+// === Consentimientos LOPD ===
+export interface Consentimiento {
+  id: string
+  padreId: string
+  alumnoId: string
+  tipo: 'datos_personales' | 'imagenes' | 'comunicaciones'
+  aceptado: boolean
+  fecha: string
+}
+
 // === Personas autorizadas ===
 export interface PersonaAutorizada {
   nombre: string
